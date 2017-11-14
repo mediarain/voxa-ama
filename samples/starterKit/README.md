@@ -17,13 +17,12 @@
 	`skill/` -> Amazon Echo Skill login, the state machine and flow
 	`speechAssets/` -> Amazon Echo Utterances, Intent Schema and Custom Slots.
 	`tests/` -> Unit Tests
-	`www/` -> Public site, expose for authentication.
 	`gulpfile.js` -> Gulp tasks
 	`serverless.yml` -> Serverless configuration
 	`package.json` -> Dependencies
 	`README.md`
 
-For Opearlo integration, you just have to add the userId, appName and apiKey to your local.json file like this:
+For AWS Mobile Analytics integration, you just have to add the appId, appTitle and cognitoIdentityPoolId to your local.json file like this:
 
 ```
 {
@@ -31,10 +30,11 @@ For Opearlo integration, you just have to add the userId, appName and apiKey to 
     "port": 3000,
     "hostSkill": true
   },
-  "opearlo": {
-  	"userId": "YOUR-USER-ID",
-  	"appName": "YOUR-APP-NAME",
-  	"apiKey": "YOUR-API-KEY"
+  "ama": {
+    "appId": "YOUR-APP-ID",
+    "appTitle": "YOUR-APP-TITLE",
+    "cognitoIdentityPoolId": "YOUR-COGNITO-IDENTITY-POOL-ID",
+    "suppressSending": false
   }
 }
 

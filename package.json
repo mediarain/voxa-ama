@@ -28,9 +28,6 @@
     "amazon mobile analytics"
   ],
   "author": "Rain Agency <npm@rain.agency> (http://rain.agency)",
-  "engines": {
-    "node": ">=4.3.2 <=6.10"
-  },
   "license": "MIT",
   "dependencies": {
     "aws-sdk": "^2.149.0",

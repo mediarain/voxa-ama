@@ -4,6 +4,9 @@
       "intent": "LaunchIntent"
     }
     , {
+      "intent": "EasterEggIntent"
+    }
+    , {
       "intent": "AMAZON.CancelIntent"
     }
     , {

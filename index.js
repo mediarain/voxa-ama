@@ -1,5 +1,5 @@
 /**
- * Voxa-Opearlo integration
+ * Voxa-AmazonMobileAnalytics integration
  *
  * Copyright (c) 2016 Rain Agency.
  * Licensed under the MIT license.

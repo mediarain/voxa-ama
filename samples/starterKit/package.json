@@ -1,6 +1,6 @@
 {
-  "name": "alexaproject-sm",
-  "version": "0.1.0",
+  "name": "voxa-ama-sample",
+  "version": "0.0.1",
   "description": "",
   "main": "gulpfile.js",
   "scripts": {
@@ -9,9 +9,6 @@
     "lint": "eslint config/ gulpfile.js services/ skill/ speechAssets/ test/ www/"
   },
   "author": "Rain",
-  "engines": {
-    "node": "4.3.2"
-  },
   "keywords": [
     "alexa",
     "skills",
@@ -22,17 +19,10 @@
   ],
   "license": "ISC",
   "dependencies": {
+    "bluebird": "^3.5.1",
+    "lodash": "^4.17.4",
     "voxa": "^2.0.0",
-    "bluebird": "^3.3.5",
-    "body-parser": "^1.15.1",
-    "ejs": "^2.4.1",
-    "express": "^4.13.4",
-    "lodash": "^4.13.1",
-    "morgan": "^1.7.0",
-    "request": "^2.72.0",
-    "serve-static": "^1.10.2",
-    "string": "^3.3.1",
-    "voxa-opearlo": "git+ssh://git@github.com:mediarain/voxa-opearlo.git"
+    "voxa-ama": "git+ssh://git@github.com:mediarain/voxa-ama.git"
   },
   "devDependencies": {
     "chai": "^3.5.0",
@@ -48,10 +38,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mediarain/voxa.git"
+    "url": "git+https://github.com/mediarain/voxa-ama.git"
   },
   "bugs": {
-    "url": "https://github.com/mediarain/voxa/issues"
+    "url": "https://github.com/mediarain/voxa-ama/issues"
   },
-  "homepage": "https://github.com/mediarain/voxa#readme"
+  "homepage": "https://github.com/mediarain/voxa-ama#readme"
 }
