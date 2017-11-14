@@ -1,0 +1,11 @@
+{
+  "server": {
+    "port": 3000,
+    "hostSkill": true
+  }
+  "opearlo": {
+    "userId": "",
+    "appName": "",
+    "apiKey": ""
+  }
+}

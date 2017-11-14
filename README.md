@@ -35,13 +35,6 @@ voxaAma(skill, opearloConfig);
 
 ```
 
-What you get
-------------
-Once you register the Voxa plugin, it will handle logging all incoming intents automatically.
-Additionally, each state will be logged as a CustomEvent. Thus out of the box you'll get a pathway that looks like:
-
-![voice pathway](https://cloud.githubusercontent.com/assets/1660429/24310429/8f0d4ef4-1095-11e7-911a-d49268c1df60.png)
-
 ### Suppressing State Events
 
 Sometimes smaller intermediary states can flood the pathways diagram. Suppress a state from logging as follows:
