@@ -1,0 +1,5 @@
+LaunchIntent open
+
+EasterEggIntent easter egg
+
+AMAZON.HelpIntent help me

@@ -1,0 +1,54 @@
+{
+  "name": "voxa-ama",
+  "version": "0.2.4",
+  "description": "Integrate Amazon Mobile Analytics analytics into your Alexa apps using the voxa framework",
+  "main": "index.js",
+  "scripts": {
+    "test": "istanbul cover _mocha -- --recursive tests",
+    "test-ci": "JUNIT_REPORT_PATH=junit.xml istanbul cover _mocha -- --recursive --colors --reporter mocha-jenkins-reporter tests",
+    "cobertura": "istanbul report cobertura --root coverage",
+    "lint": "eslint lib test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mediarain/voxa-ama.git"
+  },
+  "keywords": [
+    "alexa",
+    "skills",
+    "apps",
+    "framework",
+    "echo",
+    "voxa",
+    "analytics",
+    "ama",
+    "amazon",
+    "mobile",
+    "analytics",
+    "amazon mobile analytics"
+  ],
+  "author": "Rain Agency <npm@rain.agency> (http://rain.agency)",
+  "license": "MIT",
+  "dependencies": {
+    "aws-sdk": "^2.149.0",
+    "aws-sdk-mobile-analytics": "^0.9.2",
+    "bluebird": "^3.5.1",
+    "debug": "^3.1.0",
+    "lodash": "^4.17.4"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "eslint": "^3.15.0",
+    "eslint-config-airbnb-base": "^11.1.0",
+    "eslint-plugin-import": "^2.2.0",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.2.0",
+    "mocha-jenkins-reporter": "^0.3.7",
+    "simple-mock": "^0.7.3",
+    "voxa": "^2.2.0"
+  },
+  "bugs": {
+    "url": "https://github.com/mediarain/voxa-ama/issues"
+  },
+  "homepage": "https://github.com/mediarain/voxa-ama#readme"
+}
