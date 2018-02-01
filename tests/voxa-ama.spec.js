@@ -281,6 +281,8 @@ describe('Voxa-AmazonMobileAnalytics plugin', () => {
         expect(mobileAnalyticsClient.recordEvent.called).to.be.true;
         expect(mobileAnalyticsClient.recordEvent.calls[0].args[0]).to.equal('Session ended');
         expect(mobileAnalyticsClient.recordEvent.calls[0].returned).to.equal('MOCK TRACKED');
+        expect(mobileAnalyticsClient.recordEvent.calls[1].args[0]).to.equal('_session.stop');
+        expect(mobileAnalyticsClient.recordEvent.calls[1].returned).to.equal('MOCK TRACKED');
         expect(mobileAnalyticsClient.submitEvents.called).to.be.false;
       });
   });
@@ -346,6 +348,11 @@ describe('Voxa-AmazonMobileAnalytics plugin', () => {
       .then((reply) => {
         expect(spy.called).to.be.true;
         expect(reply).to.deep.equal({ version: '1.0' });
+        expect(mobileAnalyticsClient.recordEvent.called).to.be.true;
+        expect(mobileAnalyticsClient.recordEvent.calls[0].args[0]).to.equal('Session ended');
+        expect(mobileAnalyticsClient.recordEvent.calls[0].returned).to.equal('MOCK TRACKED');
+        expect(mobileAnalyticsClient.recordEvent.calls[1].args[0]).to.equal('_session.stop');
+        expect(mobileAnalyticsClient.recordEvent.calls[1].returned).to.equal('MOCK TRACKED');
         expect(mobileAnalyticsClient.submitEvents.called).to.be.false;
       });
   });
@@ -381,6 +388,7 @@ describe('Voxa-AmazonMobileAnalytics plugin', () => {
         expect(reply.session.attributes).to.deep.equal({});
         expect(reply.msg.statements).to.have.lengthOf(1);
         expect(reply.msg.statements[0]).to.equal('An unrecoverable error occurred.');
+        expect(mobileAnalyticsClient.recordEvent.called).to.be.false;
         expect(mobileAnalyticsClient.submitEvents.called).to.be.false;
       });
   });
