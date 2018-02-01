@@ -11,9 +11,9 @@ const EventRider = require('../lib/EventRider');
 const amaConfig = {
   appId: 'appId',
   appTitle: 'appTitle',
-  make: "Amazon",
-  platform: "Alexa",
-  cognitoIdentityPoolId: "us-east-1:123456789-1234-1234-1234-1234567891234",
+  make: 'Amazon',
+  platform: 'Alexa',
+  cognitoIdentityPoolId: 'us-east-1:123456789-1234-1234-1234-1234567891234',
   suppressSending: true
 };
 
