@@ -31,7 +31,7 @@ const amaConfig = {
   suppressSending: false, // A flag to supress sending hits. Useful while developing on the skill
 };
 
-voxaAma(skill, opearloConfig);
+voxaAma(skill, amaConfig);
 
 ```
 
@@ -39,7 +39,7 @@ voxaAma(skill, opearloConfig);
 
 Sometimes smaller intermediary states can flood the pathways diagram. Suppress a state from logging as follows:
 ```javascript
-skill.onState('my-state',alexaEvent => {
+skill.onState('my-state', (alexaEvent) => {
   alexaEvent.ama.ignore();
   return { reply: 'Greeting', to: 'my-next-state' };
 })
@@ -48,7 +48,7 @@ skill.onState('my-state',alexaEvent => {
 ### Logging variables
 You can also add additional values which will be logged along with the state custom event
 ```javascript
-skill.onState('my-state',alexaEvent => {
+skill.onState('my-state', (alexaEvent) => {
   alexaEvent.ama.variables.myVariable = 'hello'
   return { reply: 'Greeting', to: 'my-next-state' };
 })
@@ -57,8 +57,8 @@ skill.onState('my-state',alexaEvent => {
 ### Custom Events
 You can also log custom events from a state.
 ```javascript
-skill.onState('my-state',alexaEvent => {
-  alexaEvent.ama.log('my-custom-event',{ myVariable: 'hello' });
+skill.onState('my-state', (alexaEvent) => {
+  alexaEvent.ama.log('my-custom-event', { myVariable: 'hello' });
   return { reply: 'Greeting', to: 'my-next-state' };
 })
 ```
