@@ -49,7 +49,7 @@ skill.onState('my-state', (alexaEvent) => {
 You can also add additional values which will be logged along with the state custom event
 ```javascript
 skill.onState('my-state', (alexaEvent) => {
-  alexaEvent.ama.variables.myVariable = 'hello'
+  alexaEvent.ama.variables.myVariable = 'hello';
   return { reply: 'Greeting', to: 'my-next-state' };
 })
 ```
