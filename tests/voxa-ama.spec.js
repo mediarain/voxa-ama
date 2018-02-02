@@ -1,5 +1,6 @@
 'use strict';
 
+const _ = require('lodash');
 const chai = require('chai');
 const AMA = require('aws-sdk-mobile-analytics');
 
@@ -24,7 +25,7 @@ describe('Voxa-AmazonMobileAnalytics plugin', () => {
   };
 
   beforeEach(() => {
-    mobileAnalyticsClient = new AMA.Manager(amaConfig);
+    mobileAnalyticsClient = new AMA.Manager(_.cloneDeep(amaConfig));
     simple.mock(mobileAnalyticsClient, 'submitEvents').callbackWith('MOCK TRACKED');
     simple.mock(mobileAnalyticsClient, 'recordEvent').returnWith('MOCK TRACKED');
     simple.mock(AMA, 'Manager').returnWith(mobileAnalyticsClient);
@@ -55,7 +56,7 @@ describe('Voxa-AmazonMobileAnalytics plugin', () => {
       },
     };
 
-    voxaAma(voxaStateMachine, amaConfig);
+    voxaAma(voxaStateMachine, _.cloneDeep(amaConfig));
     return voxaStateMachine.execute(event)
       .then((reply) => {
         expect(spy.called).to.be.true;
@@ -89,7 +90,7 @@ describe('Voxa-AmazonMobileAnalytics plugin', () => {
       },
     };
 
-    voxaAma(voxaStateMachine, amaConfig);
+    voxaAma(voxaStateMachine, _.cloneDeep(amaConfig));
     return voxaStateMachine.execute(event)
       .then((reply) => {
         expect(spy.called).to.be.true;
@@ -127,7 +128,7 @@ describe('Voxa-AmazonMobileAnalytics plugin', () => {
       },
     };
 
-    voxaAma(voxaStateMachine, amaConfig);
+    voxaAma(voxaStateMachine, _.cloneDeep(amaConfig));
     return voxaStateMachine.execute(event)
       .then((reply) => {
         expect(spy.called).to.be.true;
@@ -164,7 +165,7 @@ describe('Voxa-AmazonMobileAnalytics plugin', () => {
       },
     };
 
-    voxaAma(voxaStateMachine, amaConfig);
+    voxaAma(voxaStateMachine, _.cloneDeep(amaConfig));
     return voxaStateMachine.execute(event)
       .then((reply) => {
         expect(spy.called).to.be.true;
@@ -205,7 +206,7 @@ describe('Voxa-AmazonMobileAnalytics plugin', () => {
       },
     };
 
-    voxaAma(voxaStateMachine, amaConfig);
+    voxaAma(voxaStateMachine, _.cloneDeep(amaConfig));
     return voxaStateMachine.execute(event)
       .then((reply) => {
         expect(spy.called).to.be.true;
@@ -238,7 +239,7 @@ describe('Voxa-AmazonMobileAnalytics plugin', () => {
       },
     };
 
-    voxaAma(voxaStateMachine, amaConfig);
+    voxaAma(voxaStateMachine, _.cloneDeep(amaConfig));
     return voxaStateMachine.execute(event)
       .then((reply) => {
         expect(spy.called).to.be.false;
@@ -273,7 +274,7 @@ describe('Voxa-AmazonMobileAnalytics plugin', () => {
       },
     };
 
-    voxaAma(voxaStateMachine, amaConfig);
+    voxaAma(voxaStateMachine, _.cloneDeep(amaConfig));
     return voxaStateMachine.execute(event)
       .then((reply) => {
         expect(spy.called).to.be.true;
@@ -314,7 +315,7 @@ describe('Voxa-AmazonMobileAnalytics plugin', () => {
       },
     };
 
-    voxaAma(voxaStateMachine, amaConfig);
+    voxaAma(voxaStateMachine, _.cloneDeep(amaConfig));
     return voxaStateMachine.execute(event)
       .then((reply) => {
         expect(spy.called).to.be.true;
@@ -343,7 +344,7 @@ describe('Voxa-AmazonMobileAnalytics plugin', () => {
       },
     };
 
-    voxaAma(voxaStateMachine, Object.assign({ignoreUsers: ['user-id']}, amaConfig));
+    voxaAma(voxaStateMachine, Object.assign({ignoreUsers: ['user-id']}, _.cloneDeep(amaConfig)));
     return voxaStateMachine.execute(event)
       .then((reply) => {
         expect(spy.called).to.be.true;
@@ -380,7 +381,7 @@ describe('Voxa-AmazonMobileAnalytics plugin', () => {
       },
     };
 
-    voxaAma(voxaStateMachine, Object.assign({ignoreUsers: ['user-id']}, amaConfig));
+    voxaAma(voxaStateMachine, Object.assign({ignoreUsers: ['user-id']}, _.cloneDeep(amaConfig)));
     return voxaStateMachine.execute(event)
       .then((reply) => {
         expect(spy.called).to.be.false;
