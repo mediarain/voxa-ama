@@ -94,7 +94,7 @@ For creating the property, you should follow the next steps:
 In this step, some resources will be automatically created: a specific role with S3, Pinpoint and Analytics permissions, a Cognito Pool Identity to manage authentication from users and an Amazon S3 Bucket to export your data.
 
 
-6) Now, go to the [AWS Mobile Analytics menu](https://console.aws.amazon.com/mobileanalytics/home/) and you will see your analytics project ready to receive events from your skill
+6) Now, go to the [AWS Mobile Analytics](https://console.aws.amazon.com/mobileanalytics/home/) menu and you will see your analytics project ready to receive events from your skill
 ![step6](https://user-images.githubusercontent.com/12286824/32787013-192fe40a-c91b-11e7-87e2-4f4b05ce6fc7.png)
 
 
