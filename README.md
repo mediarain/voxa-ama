@@ -45,20 +45,20 @@ skill.onState('my-state', (alexaEvent) => {
 })
 ```
 
-### Logging variables
+### Logging custom variables
 You can also add additional values which will be logged along with the state custom event
 ```javascript
 skill.onState('my-state', (alexaEvent) => {
-  alexaEvent.ama.variables.myVariable = 'hello';
+  alexaEvent.ama.logEvents('response', 'hello');
   return { reply: 'Greeting', to: 'my-next-state' };
 })
 ```
 
-### Custom Events
+### Specific Events
 You can also log custom events from a state.
 ```javascript
 skill.onState('my-state', (alexaEvent) => {
-  alexaEvent.ama.log('my-custom-event', { myVariable: 'hello' });
+  alexaEvent.ama.logEvents('my-custom-event', { myVariable: 'hello' });
   return { reply: 'Greeting', to: 'my-next-state' };
 })
 ```
