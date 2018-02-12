@@ -138,7 +138,7 @@ describe('Voxa-AmazonMobileAnalytics plugin', () => {
 
   it('should not register AMA analytics on IntentRequest with an invalid state', () => {
     const spy = simple.spy(() => ({ reply: 'ExitIntent.GeneralExit', to: 'die' }));
-    voxaStateMachine.onState('ExitIntent', spy);
+    voxaStateMachine.onState('exit', spy);
 
     const customEvent = _.cloneDeep(event);
     customEvent.request.type = 'IntentRequest';
@@ -156,12 +156,37 @@ describe('Voxa-AmazonMobileAnalytics plugin', () => {
       });
   });
 
+  it('should not register AMA analytics on Goodbye state when user ignored it', () => {
+    const spy = simple.spy((voxaEvent) => {
+      voxaEvent.ama.ignore();
+      return { reply: 'ExitIntent.GeneralExit', to: 'die' };
+    });
+
+    voxaStateMachine.onIntent('ExitIntent', spy);
+
+    const customEvent = _.cloneDeep(event);
+    customEvent.request.type = 'IntentRequest';
+    customEvent.request.intent = { name: 'ExitIntent' };
+    customEvent.session.new = false;
+
+    voxaAma(voxaStateMachine, _.cloneDeep(amaConfig));
+    return voxaStateMachine.execute(customEvent)
+      .then((reply) => {
+        expect(spy.called).to.be.true;
+        expect(reply.session.new).to.equal(false);
+        expect(reply.session.attributes.state).to.equal('die');
+        expect(reply.msg.statements).to.have.lengthOf(1);
+        expect(reply.msg.statements[0]).to.equal('Ok. Goodbye.');
+      });
+  });
+
   it('should register AMA analytics on SessionEndedRequest', () => {
     const spy = simple.spy(() => ({ reply: 'ExitIntent.GeneralExit' }));
     voxaStateMachine.onSessionEnded(spy);
 
     const customEvent = _.cloneDeep(event);
     customEvent.request.type = 'SessionEndedRequest';
+    customEvent.request.reason = 'USER_INITIATED';
 
     voxaAma(voxaStateMachine, _.cloneDeep(amaConfig));
     return voxaStateMachine.execute(customEvent)
@@ -186,24 +211,21 @@ describe('Voxa-AmazonMobileAnalytics plugin', () => {
       });
   });
 
-  it('should record sessions terminated due to errors as an error', () => {
-    const customEvent = _.cloneDeep(event);
-    customEvent.session.new = false;
-    customEvent.request = {
-      type: 'SessionEndedRequest',
-      reason: 'ERROR',
-      error: {
-        message: 'my message'
-      }
-    };
+  it('should not record analytics due to suppressSending flag set to true', () => {
+    const spy = simple.spy(() => ({ reply: 'ExitIntent.GeneralExit' }));
+    voxaStateMachine.onSessionEnded(spy);
 
-    voxaAma(voxaStateMachine, Object.assign({ignoreUsers: ['user-id']}, _.cloneDeep(amaConfig)));
+    const customEvent = _.cloneDeep(event);
+    customEvent.request.type = 'SessionEndedRequest';
+
+    const amaConfigCloned = _.cloneDeep(amaConfig);
+    amaConfigCloned.suppressSending = true;
+
+    voxaAma(voxaStateMachine, amaConfigCloned);
     return voxaStateMachine.execute(customEvent)
       .then((reply) => {
-        expect(reply.session.new).to.equal(false);
-        expect(reply.session.attributes).to.deep.equal({});
-        expect(reply.msg.statements).to.have.lengthOf(1);
-        expect(reply.msg.statements[0]).to.equal('An unrecoverable error occurred.');
+        expect(spy.called).to.be.true;
+        expect(reply).to.deep.equal({ version: '1.0' });
       });
   });
 });
@@ -223,6 +245,44 @@ describe('Voxa-AmazonMobileAnalytics errors', () => {
   afterEach(() => {
     AWS.restore();
     simple.restore();
+  });
+
+  it('should record SessionEndedRequest error', () => {
+    const customEvent = _.cloneDeep(event);
+    customEvent.session.new = false;
+    customEvent.request = {
+      type: 'SessionEndedRequest',
+      reason: 'ERROR',
+      error: {
+        message: 'my message'
+      },
+    };
+
+    voxaAma(voxaStateMachine, _.cloneDeep(amaConfig));
+    return voxaStateMachine.execute(customEvent)
+      .then((reply) => {
+        expect(reply.session.new).to.equal(false);
+        expect(reply.session.attributes).to.deep.equal({});
+        expect(reply.msg.statements).to.have.lengthOf(1);
+        expect(reply.msg.statements[0]).to.equal('An unrecoverable error occurred.');
+      });
+  });
+
+  it('should throw an error when trying to send AMA analytics on LaunchRequest', () => {
+    const spy = simple.spy(() => ({ reply: 'LaunchIntent.OpenResponse', to: 'entry' }));
+    voxaStateMachine.onIntent('LaunchIntent', spy);
+
+    const customEvent = _.cloneDeep(event);
+
+    voxaAma(voxaStateMachine, _.cloneDeep(amaConfig));
+    return voxaStateMachine.execute(customEvent)
+      .then((reply) => {
+        expect(spy.called).to.be.true;
+        expect(reply.session.new).to.equal(true);
+        expect(reply.session.attributes.state).to.equal('entry');
+        expect(reply.msg.statements).to.have.lengthOf(1);
+        expect(reply.msg.statements[0]).to.equal('Hello! How are you?');
+      });
   });
 
   it('should register AMA analytics on unexpected error', () => {
