@@ -1,6 +1,6 @@
 {
   "name": "voxa-ama",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "Integrate Amazon Mobile Analytics analytics into your Alexa apps using the voxa framework",
   "main": "index.js",
   "scripts": {
