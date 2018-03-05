@@ -30,10 +30,10 @@
   "author": "Rain Agency <npm@rain.agency> (http://rain.agency)",
   "license": "MIT",
   "dependencies": {
-    "aws-sdk": "^2.190.0",
+    "aws-sdk": "^2.205.0",
     "bluebird": "^3.5.1",
     "debug": "^3.1.0",
-    "lodash": "^4.17.4"
+    "lodash": "^4.17.5"
   },
   "devDependencies": {
     "aws-sdk-mock": "^1.7.0",
