@@ -39,26 +39,26 @@ voxaAma(skill, amaConfig);
 
 Sometimes smaller intermediary states can flood the pathways diagram. Suppress a state from logging as follows:
 ```javascript
-skill.onState('my-state', (alexaEvent) => {
-  alexaEvent.ama.ignore();
+skill.onState('my-state', (voxaEvent) => {
+  voxaEvent.ama.ignore();
   return { reply: 'Greeting', to: 'my-next-state' };
 })
 ```
 
-### Logging variables
+### Logging custom variables
 You can also add additional values which will be logged along with the state custom event
 ```javascript
-skill.onState('my-state', (alexaEvent) => {
-  alexaEvent.ama.variables.myVariable = 'hello';
+skill.onState('my-state', (voxaEvent) => {
+  voxaEvent.ama.logEvents('response', 'hello');
   return { reply: 'Greeting', to: 'my-next-state' };
 })
 ```
 
-### Custom Events
+### Specific Events
 You can also log custom events from a state.
 ```javascript
-skill.onState('my-state', (alexaEvent) => {
-  alexaEvent.ama.log('my-custom-event', { myVariable: 'hello' });
+skill.onState('my-state', (voxaEvent) => {
+  voxaEvent.ama.logEvents('my-custom-event', { myVariable: 'hello' });
   return { reply: 'Greeting', to: 'my-next-state' };
 })
 ```
